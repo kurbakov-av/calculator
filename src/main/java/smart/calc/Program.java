@@ -1,5 +1,6 @@
 package smart.calc;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -57,5 +58,10 @@ public class Program {
     public void shutdown() {
         enabled = false;
         scanner.close();
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
