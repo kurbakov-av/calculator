@@ -13,18 +13,6 @@ public class Program {
 
     private final OutputStream out;
 
-    public Program() {
-        this(System.in, System.out);
-    }
-
-    public Program(InputStream in) {
-        this(in, System.out);
-    }
-
-    public Program(OutputStream out) {
-        this(System.in, out);
-    }
-
     public Program(InputStream in, OutputStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
