@@ -1,6 +1,7 @@
 package smart.calc;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Operation implements Comparable<Operation> {
 
@@ -10,7 +11,7 @@ public class Operation implements Comparable<Operation> {
 
     private static final Operation MULTIPLY = new Operation("*", 2, BigDecimal::multiply);
 
-    private static final Operation DIVIDE = new Operation("/", 2, BigDecimal::divide);
+    private static final Operation DIVIDE = new Operation("/", 2, (a, b) -> a.divide(b, RoundingMode.FLOOR));
 
     private final String sign;
 
