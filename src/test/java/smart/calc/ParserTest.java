@@ -132,4 +132,14 @@ class ParserTest {
 
         assertEquals("1 2 * 3 / 4 * 5 * 6 / 7 /", collectionToSequenceString(actual));
     }
+
+    @Test
+    void allOperations() {
+        final String line = "1*2+3/4-5+6*7-8/9";
+
+        Parser parser = new Parser(line);
+        List<String> actual = parser.parse();
+
+        assertEquals("1 2 * 3 4 / + 5 - 6 7 * + 8 9 / -", collectionToSequenceString(actual));
+    }
 }
