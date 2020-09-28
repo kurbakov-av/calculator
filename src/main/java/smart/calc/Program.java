@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -30,9 +29,7 @@ public class Program {
         while (enabled && scanner.hasNextLine()) {
             try {
                 String line = scanner.nextLine();
-                Parser parser = new Parser(line);
-                List<String> statements = parser.parse();
-                BigDecimal result = calculator.calculate(statements);
+                BigDecimal result = calculator.calculate(line);
 
                 out.write(result.toString().getBytes());
                 out.write("\n".getBytes());
