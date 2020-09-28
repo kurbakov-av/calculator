@@ -34,7 +34,7 @@ public class Parser {
                 case "-":
                 case "*":
                 case "/":
-                    if (!operations.isEmpty() && getPriority(operations.peek()) >= getPriority(token)) {
+                    while (!operations.isEmpty() && getPriority(operations.peek()) >= getPriority(token)) {
                         output.add(operations.pop());
                     }
                     operations.push(token);
