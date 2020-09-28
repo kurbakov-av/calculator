@@ -142,4 +142,44 @@ class ParserTest {
 
         assertEquals("1 2 * 3 4 / + 5 - 6 7 * + 8 9 / -", collectionToSequenceString(actual));
     }
+
+    @Test
+    void bracketPriority() {
+        final String line = "1*(2+3)";
+
+        Parser parser = new Parser(line);
+        List<String> actual = parser.parse();
+
+        assertEquals("1 2 3 + *", collectionToSequenceString(actual));
+    }
+
+    @Test
+    void innerBracketPriority() {
+        final String line = "1*(2/(3-4))";
+
+        Parser parser = new Parser(line);
+        List<String> actual = parser.parse();
+
+        assertEquals("1 2 3 4 - / *", collectionToSequenceString(actual));
+    }
+
+    @Test
+    void sequenceBracketPriority() {
+        final String line = "1*(2+3)/(3-4)";
+
+        Parser parser = new Parser(line);
+        List<String> actual = parser.parse();
+
+        assertEquals("1 2 3 + * 3 4 - /", collectionToSequenceString(actual));
+    }
+
+    @Test
+    void innerAndSequenceBracketPriority() {
+        final String line = "1*(2/(3-4))/1*(2+3)/(3-4)";
+
+        Parser parser = new Parser(line);
+        List<String> actual = parser.parse();
+
+        assertEquals("1 2 3 4 - / * 1 / 2 3 + * 3 4 - /", collectionToSequenceString(actual));
+    }
 }
